@@ -4,6 +4,7 @@ module.exports = function(app) {
 
   var bodyParser = require('body-parser');
   var loopback = require('loopback');
+  var cookieParser = require('cookie-parser');
 
   // to support JSON-encoded bodies
   app.use(bodyParser.json());
@@ -17,7 +18,7 @@ module.exports = function(app) {
     model: app.models.accessToken
   }));
 
-  app.use(loopback.cookieParser(app.get('cookieSecret')));
+  app.use(cookieParser(app.get('cookieSecret')));
   app.middleware('session', loopback.session({
     secret: app.get('cookieSecret'),
     saveUninitialized: true,
